@@ -1,0 +1,225 @@
+#ifndef HOMEWORK5GIT_ELEMENT_H
+#define HOMEWORK5GIT_ELEMENT_H
+
+#include <string>
+#include <cmath>
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <iomanip>
+
+using namespace std;
+
+template<typename  xVector>
+class Element2 {
+
+    // this class hold element data
+private:
+
+    //size of n_value
+    int n_val;
+    //Line of vector
+     xVector  xVector1;
+
+    // size of m
+    int m;
+
+    //result of the function;
+    double *funcResult;
+
+    // rank of Element
+    int rank;
+
+// constructor
+public:
+
+    Element2(int nVal, xVector xVector2, int m);
+
+    // calc the (xVector - e)square
+    void func();
+
+    int getRank() const;
+
+    void setRank(int rank);
+
+    bool operator<(const Element2 *other) const;
+
+    ~Element2();
+
+    string getfuncResult() const;
+
+    double getvalue(int index);
+
+    int operator[](int x) const;
+
+    void operator++();
+
+    Element2();
+
+    Element2(const Element2 *p1);
+
+    bool operator>(const Element2 *other) const;
+
+    Element2 & operator=(const Element2 & other );
+
+
+};
+template<typename xVector>
+Element2<xVector>::~Element2() {
+
+    delete[] funcResult;
+    dynamic_cast<xVector> (delete[] xVector1);
+}
+
+//template<typename xVector>
+// Element2::getvalue(int index) {
+//    return dynamic_cast<xVector>(xVector1[index]);
+//}
+//template<typename xVector>
+//void Element2::func() {
+//    for (int i = 0; i < m; i++) {
+//        double sum = 0;
+//        for (int j = 0; j < n_val; j++) {
+//            sum += pow((xVector[j] - (i + 1)), 2);
+//        }
+//        funcResult[i] = sum;
+//    }
+//
+//
+//    /*double * e=new double [n_val];;
+//    for (int i = 0; i < m; ++i) {
+//        //init e vector;
+//
+//        for (int j = 0; j < n_val; ++j) {
+//            e[j]=i+1;
+//        }
+//        // sumOf calc
+//        double sum=0;
+//        for (int k = 0; k < n_val; ++k) {
+//            sum+= pow((this->xVector[k]-e[k]),2);
+//        }
+//        funcResult[i]=sum;
+//    }
+//    delete [] e;*/
+//}
+
+bool Element2::operator<(const Element2 *other) const {
+
+    int equalCounter = 0;
+    int smallCounter = 0;
+    for (int i = 0; i < m; i++) {
+        if (funcResult[i] <= other->funcResult[i]) { // x<=y
+            smallCounter++;
+        }
+        if (funcResult[i] == other->funcResult[i]) { //x == y
+            equalCounter++;
+        }
+    }
+    if ((equalCounter < m) && (smallCounter == m)) { //
+        return true;
+    }
+    return false;
+}
+
+int Element2::getRank() const {
+    return rank;
+}
+
+void Element2::setRank(int r) {
+    rank = r;
+}
+
+string Element2::getfuncResult() const {
+    string toReturn;
+    for (int i = 0; i < m; ++i) {
+        double temp = funcResult[i];
+        stringstream ss;
+        ss.clear();
+        ss << setprecision(6) << fixed << temp;
+        toReturn += ss.str();
+        if (i < m - 1)
+            toReturn += " ";
+
+
+    }
+    return toReturn;
+}
+
+int Element2::operator[](int x) const {
+    return rank;
+}
+
+void Element2::operator++() {
+    rank += 1;
+}
+
+/*Element2:: Element2():n_val(NULL) , xVector(NULL),m(NULL),funcResult(NULL),rank(NULL){
+    cout << " constructor\n";
+}
+
+Element2:: Element2(const Element2 *p1){
+    cout << "copy constructor\n";
+    this->n_val = p1->n_val;
+    this->xVector = p1->xVector;
+    this->m = p1->m;
+    this->funcResult = p1->funcResult;
+    this->rank = p1->rank;
+}*/
+
+
+bool Element2::operator>(const Element2 *other) const {
+    return this->rank > other->rank;
+}
+
+template<typename xVector>
+Element2<xVector>::Element2(int nVal, xVector xVector2, int m) : n_val(nVal), m(m),
+            rank(0)
+    {
+
+        // deep copy-
+        xVector = new double[nVal];
+        for (int i = 0; i < nVal; ++i) {
+           dynamic_cast< xVector[i] >= xVector1[i];
+        }
+        // create f result
+        funcResult = new double[m];
+    }
+}
+
+template<typename xVector>
+Element2<xVector>::Element2(const Element2 *p1) {
+    //using operator=
+    this=p1;
+}
+
+template<typename xVector>
+Element2<xVector>::operator=(const Element2 &other) {
+
+    //deep copy of each filed
+    this->rank=p1->rank;
+    this->m=p1->m;
+    this->n_val=p1->n_val;
+    xVector = new double[nVal];
+    for (int i = 0; i < nVal; ++i) {
+        dynamic_cast< xVector[i] >= dynamic_cast< p1->xVector1[i]>;
+    }
+    this->funcResult = new double[m];
+    for (int i = 0; i < m; ++i) {
+        funcResult[i]=p1->funcResult[i]
+    }
+}
+
+template<typename xVector>
+void Element2<xVector>::func() {
+
+    for (int i = 0; i < m; i++) {
+        double sum = 0;
+        for (int j = 0; j < n_val; j++) {
+            sum += pow((xVector[j] - (i + 1)), 2);
+        }
+        funcResult[i] = sum;
+    }
+}
+
+
+#endif //HOMEWORK5GIT_ELEMENT_H
