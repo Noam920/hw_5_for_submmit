@@ -1,4 +1,8 @@
 #include "Element.h"
+/*
+Eran Helvitz
+Noam Efrat
+*/
 
 Element::Element(int nVal, double *xVector1, int m) : n_val(nVal), m(m),
                                                      rank(0) {

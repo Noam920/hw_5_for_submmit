@@ -1,16 +1,19 @@
 #include "Container.h"
 
-
+/*
+Eran Helvitz
+Noam Efrat
+*/
 
 
 Container::Container(double** matrix , int n_elems , int n_values , int n_after_func):
         n_of_elements(n_elems), n_values(n_values) , n_values_after_func(n_after_func)
 {/* constructor set data members of containers initializing the elements
-   param matrix  - elements values
-   param n_elems  - number of elements
-   param n_values - number of values in each element
-   param n_after_func - number of values after func in each element
-*/
+  * matrix  - elements values
+  * n_elems  - number of elements
+  * n_values - number of values in each element
+  * n_after_func - number of values after func in each element
+  */
     srand( (unsigned)time( NULL ) );
     randomVector = new double[n_values];
     for(int i = 0 ; i < n_of_elements ; i++) {

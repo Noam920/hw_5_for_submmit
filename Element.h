@@ -1,5 +1,11 @@
 #ifndef HOMEWORK5GIT_ELEMENT_H
 #define HOMEWORK5GIT_ELEMENT_H
+
+/*
+Eran Helvitz
+Noam Efrat
+*/
+
 #include <string>
 #include <cmath>
 #include <iostream>
